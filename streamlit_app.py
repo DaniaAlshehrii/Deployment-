@@ -13,11 +13,12 @@ def user_input_features():
     minutes_played = st.sidebar.slider('Minutes Played', 0, 9510, 5000)
     current_value = st.sidebar.slider('Value', 0, 180000000, 90000000)
     age = st.sidebar.slider('Age', 15, 43, 32)
-    data = {'Minutes Played': minutes_played,
-            'Value': current_value,
-            'Age': age}
+    data = {'minutes played': minutes_played,
+            'current_value': current_value,
+            'age': age}
     features = pd.DataFrame(data, index=[0])
     return features
+
 
 df = user_input_features()
 
@@ -31,12 +32,14 @@ try:
 except Exception as e:
     st.error(f"Error loading models: {e}")
 
-def predict(data):    
+
+def predict(data):
     try:
         data_scaled = scaler.transform(data)  # Scale the input data
         return clf.predict(data_scaled)
     except Exception as e:
         st.error(f"Error during prediction: {e}")
+        return None
 
 if st.button('Predict Player Cluster'):
     result = predict(df)
