@@ -24,8 +24,9 @@ df = user_input_features()
 st.subheader('User Input Parameters')
 st.write(df)
 
+
 try:
-    clf = joblib.load('kmeans_model.joblib')
+    clf = joblib.load('kmean_model.joblib')
     scaler = joblib.load('scaler.joblib')
 except Exception as e:
     st.error(f"Error loading models: {e}")
